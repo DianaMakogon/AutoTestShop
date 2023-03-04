@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
 import java.util.concurrent.TimeUnit;
 
 public class BasketPageTest {
@@ -23,12 +22,13 @@ public class BasketPageTest {
     public void tearDown() {driver.quit();}
 
     @Test
-    public void discountItemTest(){
+    public void positiveItemTest(){
         driver.navigate().to("http://intershop5.skillbox.ru/product-category/catalog/");
         var buttonAddingToCartLocator = By.xpath("(//a[contains(@class, 'add_to_cart_button')])[1]");
         driver.findElement(buttonAddingToCartLocator).click();
         var buttonAddedLocator = By.cssSelector(".added_to_cart");
-        Assert.assertEquals("Добавление в корзину не произошло", "ПОДРОБНЕЕ", driver.findElement(buttonAddedLocator).getText());
+        Assert.assertEquals("Добавление в корзину не произошло", "ПОДРОБНЕЕ",
+                driver.findElement(buttonAddedLocator).getText());
         var button2AddingToCartLocator = By.xpath("(//a[contains(@class, 'add_to_cart_button')])[2]");
         driver.findElement(button2AddingToCartLocator).click();
         var basketLocator = By.cssSelector("li#menu-item-29>a");
@@ -39,10 +39,12 @@ public class BasketPageTest {
         driver.findElement(button3AddingToCartLocator).click();
         driver.findElement(basketLocator).click();
         var quantityInCartLocator = By.xpath("//a[@class='remove']");
-        Assert.assertEquals("Неверное количество товара в корзине", 3, driver.findElements(quantityInCartLocator).size());
+        Assert.assertEquals("Неверное количество товара в корзине", 3,
+                driver.findElements(quantityInCartLocator).size());
         var checkoutLocator = By.cssSelector(".checkout-button");
         driver.findElement(checkoutLocator).click();
-        Assert.assertEquals("Нет просьбы авторизоваться", "Авторизуйтесь", driver.findElement(By.cssSelector(".showlogin")).getText());
+        Assert.assertEquals("Нет просьбы авторизоваться", "Авторизуйтесь",
+                driver.findElement(By.cssSelector(".showlogin")).getText());
     }
 
     @Test
@@ -55,12 +57,14 @@ public class BasketPageTest {
         var button3AddingToCartLocator = By.xpath("(//a[contains(@class, 'add_to_cart_button')])[3]");
         driver.findElement(button3AddingToCartLocator).click();
         var buttonAddedLocator = By.cssSelector(".added_to_cart");
-        Assert.assertEquals("Добавление в корзину не произошло", "ПОДРОБНЕЕ", driver.findElement(buttonAddedLocator).getText());
+        Assert.assertEquals("Добавление в корзину не произошло", "ПОДРОБНЕЕ",
+                driver.findElement(buttonAddedLocator).getText());
         var basketLocator = By.cssSelector("li#menu-item-29>a");
         driver.findElement(basketLocator).click();
         var quantityInCartLocator = By.xpath("//a[@class='remove']");
         driver.findElement(quantityInCartLocator).click();
-        Assert.assertEquals("Неверное количество товара после удаления из корзины", 2, driver.findElements(quantityInCartLocator).size());
+        Assert.assertEquals("Неверное количество товара после удаления из корзины", 2,
+                driver.findElements(quantityInCartLocator).size());
     }
 
     @Test
@@ -69,7 +73,8 @@ public class BasketPageTest {
         var buttonAddingToCartLocator = By.xpath("(//a[contains(@class, 'add_to_cart_button')])[1]");
         driver.findElement(buttonAddingToCartLocator).click();
         var buttonAddedLocator = By.cssSelector(".added_to_cart");
-        Assert.assertEquals("Добавление в корзину не произошло", "ПОДРОБНЕЕ", driver.findElement(buttonAddedLocator).getText());
+        Assert.assertEquals("Добавление в корзину не произошло", "ПОДРОБНЕЕ",
+                driver.findElement(buttonAddedLocator).getText());
         var button2AddingToCartLocator = By.xpath("(//a[contains(@class, 'add_to_cart_button')])[2]");
         driver.findElement(button2AddingToCartLocator).click();
         var basketLocator = By.cssSelector("li#menu-item-29>a");
@@ -78,7 +83,23 @@ public class BasketPageTest {
         driver.findElement(couponLocator).sendKeys("sert500");
         var buttonLocator = By.cssSelector(".button");
         driver.findElement(buttonLocator).click();
-        Assert.assertEquals("Купон не применился", "Купон успешно добавлен.", driver.findElement(By.cssSelector(".woocommerce-message")).getText());
+        Assert.assertEquals("Купон не применился", "Купон успешно добавлен.",
+                driver.findElement(By.cssSelector(".woocommerce-message")).getText());
+    }
+
+    @Test
+    public void couponCalculationTest(){
+        driver.navigate().to("http://intershop5.skillbox.ru/product/apple-watch/");
+        var buttonAddingToCartLocator = By.cssSelector(".single_add_to_cart_button");
+        driver.findElement(buttonAddingToCartLocator).click();
+        var basketLocator = By.cssSelector("li#menu-item-29>a");
+        driver.findElement(basketLocator).click();
+        var couponLocator = By.cssSelector("#coupon_code");
+        driver.findElement(couponLocator).sendKeys("sert500");
+        var buttonLocator = By.cssSelector(".button");
+        driver.findElement(buttonLocator).click();
+        Assert.assertEquals("бщая стоймость не верно расчитана", "34990,00₽",
+                driver.findElement(By.xpath("(//bdi)[3]")).getText());
     }
 
     @Test
@@ -87,7 +108,8 @@ public class BasketPageTest {
         var buttonAddingToCartLocator = By.xpath("(//a[contains(@class, 'add_to_cart_button')])[1]");
         driver.findElement(buttonAddingToCartLocator).click();
         var buttonAddedLocator = By.cssSelector(".added_to_cart");
-        Assert.assertEquals("Добавление в корзину не произошло", "ПОДРОБНЕЕ", driver.findElement(buttonAddedLocator).getText());
+        Assert.assertEquals("Добавление в корзину не произошло", "ПОДРОБНЕЕ",
+                driver.findElement(buttonAddedLocator).getText());
         var button2AddingToCartLocator = By.xpath("(//a[contains(@class, 'add_to_cart_button')])[2]");
         driver.findElement(button2AddingToCartLocator).click();
         var basketLocator = By.cssSelector("li#menu-item-29>a");
@@ -96,10 +118,12 @@ public class BasketPageTest {
         driver.findElement(couponLocator).sendKeys("sert500");
         var buttonLocator = By.cssSelector(".button");
         driver.findElement(buttonLocator).click();
-        Assert.assertEquals("Купон не применился", "Купон успешно добавлен.", driver.findElement(By.cssSelector(".woocommerce-message")).getText());
+        Assert.assertEquals("Купон не применился", "Купон успешно добавлен.",
+                driver.findElement(By.cssSelector(".woocommerce-message")).getText());
         driver.navigate().to("http://intershop5.skillbox.ru/cart/");
         driver.findElement(By.cssSelector(".woocommerce-remove-coupon")).click();
-        Assert.assertEquals("Купон не удалился", "Купон удален.", driver.findElement(By.cssSelector(".woocommerce-message")).getText());
+        Assert.assertEquals("Купон не удалился", "Купон удален.",
+                driver.findElement(By.cssSelector(".woocommerce-message")).getText());
     }
 
     @Test
@@ -108,7 +132,8 @@ public class BasketPageTest {
         var buttonAddingToCartLocator = By.xpath("(//a[contains(@class, 'add_to_cart_button')])[1]");
         driver.findElement(buttonAddingToCartLocator).click();
         var buttonAddedLocator = By.cssSelector(".added_to_cart");
-        Assert.assertEquals("Добавление в корзину не произошло", "ПОДРОБНЕЕ", driver.findElement(buttonAddedLocator).getText());
+        Assert.assertEquals("Добавление в корзину не произошло", "ПОДРОБНЕЕ",
+                driver.findElement(buttonAddedLocator).getText());
         var button2AddingToCartLocator = By.xpath("(//a[contains(@class, 'add_to_cart_button')])[2]");
         driver.findElement(button2AddingToCartLocator).click();
         var basketLocator = By.cssSelector("li#menu-item-29>a");
@@ -117,6 +142,7 @@ public class BasketPageTest {
         driver.findElement(couponLocator).sendKeys("sert5000");
         var buttonLocator = By.cssSelector(".button");
         driver.findElement(buttonLocator).click();
-        Assert.assertEquals("Купон не применился", "Неверный купон.", driver.findElement(By.cssSelector(".woocommerce-error>li")).getText());
+        Assert.assertEquals("Купон не применился", "Неверный купон.",
+                driver.findElement(By.cssSelector(".woocommerce-error>li")).getText());
     }
 }

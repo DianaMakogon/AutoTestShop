@@ -6,21 +6,18 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import java.util.concurrent.TimeUnit;
 
 public class HomePageTest {
     private WebDriver driver;
-    private WebDriverWait wait;
 
     @Before
     public void setUp()
     {
         System.setProperty("webdriver.chrome.driver", "drivers\\chromedriver.exe");
         driver = new ChromeDriver();
-        wait = new WebDriverWait(driver, 5);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
@@ -165,7 +162,8 @@ public class HomePageTest {
         var clothLocator = By.cssSelector("li#menu-item-48>a");
         driver.findElement(clothLocator).click();
         var clothElementLocator = By.cssSelector("h1.entry-title");
-        Assert.assertTrue("Не работает переход в раздел одежда", driver.findElement(clothElementLocator).isDisplayed());
+        Assert.assertTrue("Не работает переход в раздел одежда",
+                driver.findElement(clothElementLocator).isDisplayed());
 
         driver.navigate().to("http://intershop5.skillbox.ru/");
         var myAccountLocator = By.cssSelector("li#menu-item-30>a");
@@ -184,7 +182,8 @@ public class HomePageTest {
         driver.navigate().to("http://intershop5.skillbox.ru/");
         var orderingLocator = By.cssSelector("li#menu-item-31>a");
         driver.findElement(orderingLocator).click();
-        Assert.assertTrue("Не работает переход к оформлению заказа", driver.findElement(homeLocator).isDisplayed());
+        Assert.assertTrue("Не работает переход к оформлению заказа",
+                driver.findElement(homeLocator).isDisplayed());
 
         var orderingBasketElementLocator = By.cssSelector("span");
         var orderingBasketElement = driver.findElement(orderingBasketElementLocator).getText();

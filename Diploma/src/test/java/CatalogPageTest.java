@@ -40,7 +40,8 @@ public class CatalogPageTest {
         var buttonLocator = By.cssSelector(".add_to_cart_button");
         driver.findElement(buttonLocator).click();
         var buttonAddedLocator = By.cssSelector(".added_to_cart");
-        Assert.assertEquals("Добавление в корзину не произошло", "ПОДРОБНЕЕ", driver.findElement(buttonAddedLocator).getText());
+        Assert.assertEquals("Добавление в корзину не произошло", "ПОДРОБНЕЕ",
+                driver.findElement(buttonAddedLocator).getText());
         driver.findElement(buttonAddedLocator).click();
         var descriptionLocator = driver.findElement(By.cssSelector(".current")).getText();
         Assert.assertEquals("Переход в корзину не произошел", "Корзина", descriptionLocator);
@@ -53,14 +54,16 @@ public class CatalogPageTest {
         driver.findElement(section1Locator).click();
         var section1Element = By.cssSelector(".entry-title");
         var section1TextElement = driver.findElement(section1Element).getText();
-        Assert.assertEquals("Переход в раздел без категории не произошел", "БЕЗ КАТЕГОРИИ", section1TextElement);
+        Assert.assertEquals("Переход в раздел без категории не произошел", "БЕЗ КАТЕГОРИИ",
+                section1TextElement);
 
         driver.navigate().to("http://intershop5.skillbox.ru/product-category/catalog/");
         var section2Locator = By.cssSelector(".cat-item-20>a");
         driver.findElement(section2Locator).click();
         var section2Element = By.cssSelector(".entry-title");
         var section2TextElement = driver.findElement(section2Element).getText();
-        Assert.assertEquals("Переход в раздел бытовая техника не произошел", "БЫТОВАЯ ТЕХНИКА", section2TextElement);
+        Assert.assertEquals("Переход в раздел бытовая техника не произошел", "БЫТОВАЯ ТЕХНИКА",
+                section2TextElement);
 
         driver.navigate().to("http://intershop5.skillbox.ru/product-category/catalog/");
         var section3Locator = By.cssSelector(".cat-item-19>a");
@@ -95,35 +98,40 @@ public class CatalogPageTest {
         driver.findElement(section7Locator).click();
         var section7Element = By.cssSelector(".entry-title");
         var section7TextElement = driver.findElement(section7Element).getText();
-        Assert.assertEquals("Переход в раздел стиральные машины не произошел", "СТИРАЛЬНЫЕ МАШИНЫ", section7TextElement);
+        Assert.assertEquals("Переход в раздел стиральные машины не произошел", "СТИРАЛЬНЫЕ МАШИНЫ",
+                section7TextElement);
 
         driver.navigate().to("http://intershop5.skillbox.ru/product-category/catalog/");
         var section8Locator = By.cssSelector(".cat-item-25>a");
         driver.findElement(section8Locator).click();
         var section8Element = By.cssSelector(".entry-title");
         var section8TextElement = driver.findElement(section8Element).getText();
-        Assert.assertEquals("Переход в раздел телевизоры не произошел", "ТЕЛЕВИЗОРЫ", section8TextElement);
+        Assert.assertEquals("Переход в раздел телевизоры не произошел", "ТЕЛЕВИЗОРЫ",
+                section8TextElement);
 
         driver.navigate().to("http://intershop5.skillbox.ru/product-category/catalog/");
         var section9Locator = By.cssSelector(".cat-item-24>a");
         driver.findElement(section9Locator).click();
         var section9Element = By.cssSelector(".entry-title");
         var section9TextElement = driver.findElement(section9Element).getText();
-        Assert.assertEquals("Переход в раздел телефоны не произошел", "ТЕЛЕФОНЫ", section9TextElement);
+        Assert.assertEquals("Переход в раздел телефоны не произошел", "ТЕЛЕФОНЫ",
+                section9TextElement);
 
         driver.navigate().to("http://intershop5.skillbox.ru/product-category/catalog/");
         var section10Locator = By.cssSelector(".cat-item-27>a");
         driver.findElement(section10Locator).click();
         var section10Element = By.cssSelector(".entry-title");
         var section10TextElement = driver.findElement(section10Element).getText();
-        Assert.assertEquals("Переход в раздел фото не произошел", "ФОТО/ВИДЕО", section10TextElement);
+        Assert.assertEquals("Переход в раздел фото не произошел", "ФОТО/ВИДЕО",
+                section10TextElement);
 
         driver.navigate().to("http://intershop5.skillbox.ru/product-category/catalog/");
         var section11Locator = By.cssSelector(".cat-item-21>a");
         driver.findElement(section11Locator).click();
         var section11Element = By.cssSelector(".entry-title");
         var section11TextElement = driver.findElement(section11Element).getText();
-        Assert.assertEquals("Переход в раздел холодильники не произошел", "ХОЛОДИЛЬНИКИ", section11TextElement);
+        Assert.assertEquals("Переход в раздел холодильники не произошел", "ХОЛОДИЛЬНИКИ",
+                section11TextElement);
 
         driver.navigate().to("http://intershop5.skillbox.ru/product-category/catalog/");
         var section12Locator = By.cssSelector(".cat-item-23>a");
@@ -137,7 +145,8 @@ public class CatalogPageTest {
         driver.findElement(section13Locator).click();
         var section13Element = By.cssSelector(".entry-title");
         var section13TextElement = driver.findElement(section13Element).getText();
-        Assert.assertEquals("Переход в раздел электроника не произошел", "ЭЛЕКТРОНИКА", section13TextElement);
+        Assert.assertEquals("Переход в раздел электроника не произошел", "ЭЛЕКТРОНИКА",
+                section13TextElement);
     }
 
     @Test
@@ -161,20 +170,23 @@ public class CatalogPageTest {
         var numberLocator = By.xpath("//a[@class='page-numbers']");
         driver.findElement(numberLocator).click();
         var amountOfElements = By.cssSelector(".woocommerce-breadcrumb>span");
-        Assert.assertEquals("Переход на вторую страницу каталога не произошло", "Page 2", driver.findElement(amountOfElements).getText());
+        Assert.assertEquals("Переход на вторую страницу каталога не произошло", "Page 2",
+                driver.findElement(amountOfElements).getText());
         var numbers3Locator = By.cssSelector("ul.page-numbers");
         WebElement Element3 = driver.findElement(numbers3Locator);
         js.executeScript("arguments[0].scrollIntoView();", Element3);
         var number3Locator = By.xpath("(//a[@class='page-numbers'])[2]");
         driver.findElement(number3Locator).click();
         var amountOfElements3 = By.cssSelector(".woocommerce-breadcrumb>span");
-        Assert.assertEquals("Переход на вторую страницу каталога не произошло", "Page 3", driver.findElement(amountOfElements3).getText());
+        Assert.assertEquals("Переход на вторую страницу каталога не произошло", "Page 3",
+                driver.findElement(amountOfElements3).getText());
         var numbersLastLocator = By.cssSelector("ul.page-numbers");
         WebElement ElementLast = driver.findElement(numbersLastLocator);
         js.executeScript("arguments[0].scrollIntoView();", ElementLast);
         var numberLastLocator = By.xpath("(//a[@class='page-numbers'])[last()]");
         driver.findElement(numberLastLocator).click();
         var amountOfElementsLast = By.cssSelector(".woocommerce-breadcrumb>span");
-        Assert.assertEquals("Переход на вторую страницу каталога не произошло", "Page 11", driver.findElement(amountOfElementsLast).getText());
+        Assert.assertEquals("Переход на вторую страницу каталога не произошло", "Page 11",
+                driver.findElement(amountOfElementsLast).getText());
     }
 }
