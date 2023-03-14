@@ -8,34 +8,36 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+
 import java.util.concurrent.TimeUnit;
 
 public class HomePageTest {
     private WebDriver driver;
 
     @Before
-    public void setUp()
-    {
+    public void setUp() {
         System.setProperty("webdriver.chrome.driver", "drivers\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     @After
-    public void tearDown() {driver.quit();}
+    public void tearDown() {
+        driver.quit();
+    }
 
     @Test
-    public void searchTest(){
+    public void searchTest() {
         driver.navigate().to("http://intershop5.skillbox.ru/");
         var searchLocator = By.cssSelector(".search-field");
-        driver.findElement(searchLocator).sendKeys("телефон"+"\n");
+        driver.findElement(searchLocator).sendKeys("телефон" + "\n");
         var searchElementLocator = By.cssSelector(".entry-title");
         Assert.assertEquals("Неверный результат поиска", "РЕЗУЛЬТАТЫ ПОИСКА: “ТЕЛЕФОН”",
                 driver.findElement(searchElementLocator).getText());
     }
 
     @Test
-    public void sectionTest(){
+    public void sectionTest() {
         driver.navigate().to("http://intershop5.skillbox.ru/");
         var section1Locator = By.xpath("(//h4)[1]");
         driver.findElement(section1Locator).click();
@@ -57,7 +59,7 @@ public class HomePageTest {
     }
 
     @Test
-    public void sectionTransitionsTest(){
+    public void sectionTransitionsTest() {
         Actions builder = new Actions(driver);
         driver.navigate().to("http://intershop5.skillbox.ru/");
         var homeLocator = By.cssSelector("li#menu-item-26>a");
@@ -167,17 +169,17 @@ public class HomePageTest {
 
         driver.navigate().to("http://intershop5.skillbox.ru/");
         var myAccountLocator = By.cssSelector("li#menu-item-30>a");
-        driver.findElement( myAccountLocator).click();
-        var  myAccountElementLocator = By.cssSelector("h2.post-title");
+        driver.findElement(myAccountLocator).click();
+        var myAccountElementLocator = By.cssSelector("h2.post-title");
         Assert.assertTrue("Не работает переход в раздел мой аккаунт",
-                driver.findElement( myAccountElementLocator).isDisplayed());
+                driver.findElement(myAccountElementLocator).isDisplayed());
 
         driver.navigate().to("http://intershop5.skillbox.ru/");
         var basketLocator = By.cssSelector("li#menu-item-29>a");
         driver.findElement(basketLocator).click();
         var basketElementLocator = By.cssSelector("span");
         var basketElement = driver.findElement(basketElementLocator).getText();
-        Assert.assertEquals("Не работает переход в козину", "Корзина",basketElement);
+        Assert.assertEquals("Не работает переход в козину", "Корзина", basketElement);
 
         driver.navigate().to("http://intershop5.skillbox.ru/");
         var orderingLocator = By.cssSelector("li#menu-item-31>a");
@@ -187,11 +189,11 @@ public class HomePageTest {
 
         var orderingBasketElementLocator = By.cssSelector("span");
         var orderingBasketElement = driver.findElement(orderingBasketElementLocator).getText();
-        Assert.assertEquals("Не работает переход", "Корзина",orderingBasketElement);
+        Assert.assertEquals("Не работает переход", "Корзина", orderingBasketElement);
     }
 
     @Test
-    public void promoBannerTest(){
+    public void promoBannerTest() {
         driver.navigate().to("http://intershop5.skillbox.ru/");
         JavascriptExecutor js = (JavascriptExecutor) driver;
         WebElement Element = driver.findElement(By.xpath("(//img)[4]"));
@@ -204,7 +206,7 @@ public class HomePageTest {
     }
 
     @Test
-    public void footerTest(){
+    public void footerTest() {
         driver.navigate().to("http://intershop5.skillbox.ru/");
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
@@ -228,7 +230,7 @@ public class HomePageTest {
         driver.findElement(basketLocator).click();
         var basketElementLocator = By.cssSelector("span");
         var basketElement = driver.findElement(basketElementLocator).getText();
-        Assert.assertEquals("Не работает переход", "Корзина",basketElement);
+        Assert.assertEquals("Не работает переход", "Корзина", basketElement);
 
         driver.navigate().to("http://intershop5.skillbox.ru/");
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
@@ -244,7 +246,7 @@ public class HomePageTest {
         driver.findElement(orderingLocator).click();
         var basketОrderElementLocator = By.cssSelector("span");
         var basketOrderElement = driver.findElement(basketОrderElementLocator).getText();
-        Assert.assertEquals("Не работает переход", "Корзина",basketOrderElement);
+        Assert.assertEquals("Не работает переход", "Корзина", basketOrderElement);
 
         driver.navigate().to("http://intershop5.skillbox.ru/");
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
@@ -256,7 +258,7 @@ public class HomePageTest {
     }
 
     @Test
-    public void viewedProductsTest(){
+    public void viewedProductsTest() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         driver.navigate().to("http://intershop5.skillbox.ru/");
         var catalogLocator = By.cssSelector("li#menu-item-46>a");

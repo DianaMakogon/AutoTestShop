@@ -5,24 +5,26 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+
 import java.util.concurrent.TimeUnit;
 
 public class BasketPageTest {
     private WebDriver driver;
 
     @Before
-    public void setUp()
-    {
+    public void setUp() {
         System.setProperty("webdriver.chrome.driver", "drivers\\chromedriver.exe");
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     @After
-    public void tearDown() {driver.quit();}
+    public void tearDown() {
+        driver.quit();
+    }
 
     @Test
-    public void positiveItemTest(){
+    public void positiveItemTest() {
         driver.navigate().to("http://intershop5.skillbox.ru/product-category/catalog/");
         var buttonAddingToCartLocator = By.xpath("(//a[contains(@class, 'add_to_cart_button')])[1]");
         driver.findElement(buttonAddingToCartLocator).click();
@@ -48,7 +50,7 @@ public class BasketPageTest {
     }
 
     @Test
-    public void removalFromCartTest(){
+    public void removalFromCartTest() {
         driver.navigate().to("http://intershop5.skillbox.ru/product-category/catalog/");
         var buttonAddingToCartLocator = By.xpath("(//a[contains(@class, 'add_to_cart_button')])[1]");
         driver.findElement(buttonAddingToCartLocator).click();
@@ -63,12 +65,14 @@ public class BasketPageTest {
         driver.findElement(basketLocator).click();
         var quantityInCartLocator = By.xpath("//a[@class='remove']");
         driver.findElement(quantityInCartLocator).click();
+        var messageLocator = By.cssSelector(".woocommerce-message");
+        Assert.assertTrue("Удаление не произошло", driver.findElement(messageLocator).isDisplayed());
         Assert.assertEquals("Неверное количество товара после удаления из корзины", 2,
                 driver.findElements(quantityInCartLocator).size());
     }
 
     @Test
-    public void couponAddTest(){
+    public void couponAddTest() {
         driver.navigate().to("http://intershop5.skillbox.ru/product-category/catalog/");
         var buttonAddingToCartLocator = By.xpath("(//a[contains(@class, 'add_to_cart_button')])[1]");
         driver.findElement(buttonAddingToCartLocator).click();
@@ -88,7 +92,7 @@ public class BasketPageTest {
     }
 
     @Test
-    public void couponCalculationTest(){
+    public void couponCalculationTest() {
         driver.navigate().to("http://intershop5.skillbox.ru/product/apple-watch/");
         var buttonAddingToCartLocator = By.cssSelector(".single_add_to_cart_button");
         driver.findElement(buttonAddingToCartLocator).click();
@@ -103,7 +107,7 @@ public class BasketPageTest {
     }
 
     @Test
-    public void couponNegativeTest(){
+    public void couponNegativeTest() {
         driver.navigate().to("http://intershop5.skillbox.ru/product-category/catalog/");
         var buttonAddingToCartLocator = By.xpath("(//a[contains(@class, 'add_to_cart_button')])[1]");
         driver.findElement(buttonAddingToCartLocator).click();
@@ -127,7 +131,7 @@ public class BasketPageTest {
     }
 
     @Test
-    public void couponErrorTest(){
+    public void couponErrorTest() {
         driver.navigate().to("http://intershop5.skillbox.ru/product-category/catalog/");
         var buttonAddingToCartLocator = By.xpath("(//a[contains(@class, 'add_to_cart_button')])[1]");
         driver.findElement(buttonAddingToCartLocator).click();

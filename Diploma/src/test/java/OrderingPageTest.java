@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.util.concurrent.TimeUnit;
 
 public class OrderingPageTest {
@@ -14,8 +15,7 @@ public class OrderingPageTest {
     private WebDriverWait wait;
 
     @Before
-    public void setUp()
-    {
+    public void setUp() {
         System.setProperty("webdriver.chrome.driver", "drivers\\chromedriver.exe");
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, 5);
@@ -23,10 +23,12 @@ public class OrderingPageTest {
     }
 
     @After
-    public void tearDown() {driver.quit();}
+    public void tearDown() {
+        driver.quit();
+    }
 
     @Test
-    public void nullOrderingTest(){
+    public void nullOrderingTest() {
         driver.navigate().to("http://intershop5.skillbox.ru/my-account/");
         driver.findElement(By.cssSelector("#username")).sendKeys("k2jbfgnggiuik");
         driver.findElement(By.cssSelector("#password")).sendKeys("fa");
@@ -56,11 +58,11 @@ public class OrderingPageTest {
         Assert.assertTrue("Оформление заказа не произошло",
                 driver.findElement(By.cssSelector(".woocommerce-error")).isDisplayed());
         Assert.assertEquals("Неверное количество обязательных строк", 9,
-                driver.findElements(By.cssSelector("ul.woocommerce-error>li")).size() );
+                driver.findElements(By.cssSelector("ul.woocommerce-error>li")).size());
     }
 
     @Test
-    public void positiveOrderingTest(){
+    public void positiveOrderingTest() {
         driver.navigate().to("http://intershop5.skillbox.ru/my-account/");
         driver.findElement(By.cssSelector("#username")).sendKeys("k2jbfgnggiuik");
         driver.findElement(By.cssSelector("#password")).sendKeys("fa");
@@ -94,7 +96,7 @@ public class OrderingPageTest {
     }
 
     @Test
-    public void negativeOrderingTest(){
+    public void negativeOrderingTest() {
         driver.navigate().to("http://intershop5.skillbox.ru/my-account/");
         driver.findElement(By.cssSelector("#username")).sendKeys("k2jbfgnggiuik");
         driver.findElement(By.cssSelector("#password")).sendKeys("fa");

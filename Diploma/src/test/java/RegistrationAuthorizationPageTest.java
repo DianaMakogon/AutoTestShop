@@ -12,18 +12,19 @@ public class RegistrationAuthorizationPageTest {
     private WebDriver driver;
 
     @Before
-    public void setUp()
-    {
+    public void setUp() {
         System.setProperty("webdriver.chrome.driver", "drivers\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     @After
-    public void tearDown() {driver.quit();}
+    public void tearDown() {
+        driver.quit();
+    }
 
     @Test
-    public void negativeRegistrationTest(){
+    public void negativeRegistrationTest() {
         driver.navigate().to("http://intershop5.skillbox.ru/my-account/");
         driver.findElement(By.cssSelector(".custom-register-button")).click();
         var buttonLocator = By.cssSelector(".woocommerce-Button");
@@ -54,14 +55,15 @@ public class RegistrationAuthorizationPageTest {
     }
 
     @Test
-    public void positiveRegistrationTest(){
+    public void positiveRegistrationTest() {
         driver.navigate().to("http://intershop5.skillbox.ru/my-account/");
         driver.findElement(By.cssSelector(".custom-register-button")).click();
         var usernameLocator = By.cssSelector("#reg_username");
         var emailLocator = By.cssSelector("#reg_email");
         var passwordLocator = By.cssSelector("#reg_password");
+        long random = Math.round(Math.random() * 100);
         driver.findElement(usernameLocator).sendKeys("k444jbfgnggiuik");
-        driver.findElement(emailLocator).sendKeys("f4@ma.ru");
+        driver.findElement(emailLocator).sendKeys(random + "f4@ma.ru");
         driver.findElement(passwordLocator).sendKeys("fa4");
         var buttonLocator = By.cssSelector(".woocommerce-Button");
         driver.findElement(buttonLocator).click();
@@ -74,7 +76,7 @@ public class RegistrationAuthorizationPageTest {
     }
 
     @Test
-    public void positiveAuthorizationTest(){
+    public void positiveAuthorizationTest() {
         driver.navigate().to("http://intershop5.skillbox.ru/my-account/");
         var usernameEmailLocator = By.cssSelector("#username");
         var passwordLocator = By.cssSelector("#password");
@@ -95,7 +97,7 @@ public class RegistrationAuthorizationPageTest {
     }
 
     @Test
-    public void negativeAuthorizationTest(){
+    public void negativeAuthorizationTest() {
         driver.navigate().to("http://intershop5.skillbox.ru/my-account/");
         var usernameEmailLocator = By.cssSelector("#username");
         var passwordLocator = By.cssSelector("#password");
@@ -116,7 +118,7 @@ public class RegistrationAuthorizationPageTest {
     }
 
     @Test
-    public void negativeAuthorizationUsernameTest(){
+    public void negativeAuthorizationUsernameTest() {
         driver.navigate().to("http://intershop5.skillbox.ru/my-account/");
         var usernameEmailLocator = By.cssSelector("#username");
         var passwordLocator = By.cssSelector("#password");
@@ -130,7 +132,7 @@ public class RegistrationAuthorizationPageTest {
     }
 
     @Test
-    public void negativeAuthorizationEmailTest(){
+    public void negativeAuthorizationEmailTest() {
         driver.navigate().to("http://intershop5.skillbox.ru/my-account/");
         var usernameEmailLocator = By.cssSelector("#username");
         var passwordLocator = By.cssSelector("#password");
@@ -144,7 +146,7 @@ public class RegistrationAuthorizationPageTest {
     }
 
     @Test
-    public void forgotPasswordTest(){
+    public void forgotPasswordTest() {
         driver.navigate().to("http://intershop5.skillbox.ru/my-account/");
         driver.findElement(By.cssSelector(".woocommerce-LostPassword>a")).click();
         var passwordLocator = By.cssSelector(".woocommerce-Input");
